@@ -3,6 +3,11 @@
 ## Menu
 - [I.Descripcion](#Descripcion).
 - [II.Objetivos](#Objetivos).
+- [III.Descripcion de detalles Tecnicos](#Descripcion-de-detalles-Tecnicos).
+- [IV.Clientes](#Clientes).
+- [V.Usuarios](#Usuarios).
+- [VI.Enlace de Repositorio](#Enlace-de-Repositorio).
+- [VII.Roles de los miembros](#Roles-de-los-miembros).
 - [IX.Anotaciones](#Anotaciones).
 - [X.Referencias externas](#Referencias-externas).
 
@@ -27,6 +32,43 @@ registros
 *Uso de un segundo archivo variante para almacenar información que no es tan sensible y debe cambiar.
 *uso de un tercer archivo para servir de respaldo de la información de los archivos antes mencionados
 *Parametrizar toda la información para acoplarse a diferentes necesidades
+
+
+## <a name="Descripcion-de-detalles-Tecnicos"></a>Descripcion de detalles Tecnicos
+
+###A. 	`Requerimientos Local:` 
+
+- Sistemas operativos (instalación Local): Windows Xp, 10, 8, 7, OS X, Diestros Linux-BSD-Solaris
+- Memoria RAM: 2gigas mínimo.
+- Procesador: Dual Core mínimo, 1Gz de procesador.
+- Espacio Mínimo: 15gigbytes de disco
+
+## <a name="Clientes"></a>Clientes
+
+Los posibles clientes serian cualquier empresa de pequeño o mediano tamaño.
+
+## <a name="Usuarios"></a>Usuarios
+
+Los usuarios finales serian: personal de recursos humanos.
+
+## <a name="Enlace-de-Repositorio"></a>Enlaces
+
+- `Repositorio:`https://github.com/MarioSalamanca/Sistema-de-nomina
+- `Documentos:` https://drive.google.com/drive/u/0/folders/1Ntq5mMDff3GCPBxiGazKsLfQ3FnNPL8H?ogsrc=32
+
+  
+## <a name="Roles-de-los-miembros"></a>Roles de los miembros
+
+A.	 `Aldair Peralta:` Apih97/ https://github.com/Apih97
+
+Mini Biografía: Estudiante de las carreras de  Ingeniería en sistemas e Ingeniería en gerencia Informática, 
+actualmente cursando quinto año, paciente, analítico, inventivo. Actual en el uso de PHP, Visual Basic, Java, SQL Server, MySQL.
+Rol en el proyecto: Programador, desarrollador, investigador y escritor.
+
+B.	`Mario Salamanca:` MarioSalamanca / 11020330/ https://github.com/MarioSalamanca
+
+MiniBiografia: Estudiante de Ingenieria en Sistemas de Informacion, En uso de Java, C, C++. Rol en Proyecto: Líder, Programador, desarrollador, investigador.
+
 
 ## <a name="Anotaciones"></a>Anotaciones
 
