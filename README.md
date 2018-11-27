@@ -29,8 +29,11 @@ registros
 
 `Objetivos especificos`
 * Integrar manejo de un archivo maestro para guardar información importante.
+
 *Uso de un segundo archivo variante para almacenar información que no es tan sensible y debe cambiar.
+
 *uso de un tercer archivo para servir de respaldo de la información de los archivos antes mencionados
+
 *Parametrizar toda la información para acoplarse a diferentes necesidades
 
 
