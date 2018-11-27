@@ -15,8 +15,8 @@ desde cero en Excel en donde se tienen que ingresar los datos manualmente
 calculándolos antes de ser ingresados, una persona en la ONG se puso en contacto
 con nosotros ya que necesita una forma más rápida y eficiente de manejar los
 registros
+## <a name="Objetivos"></a>Objetivos
 
-## <a name="Objetivos"></>Objetivos
 `Objetivo general`
 * Desarrollar un sistema de gestión de nómina que pueda realizar de forma sencilla todos los procesos relativos a los empleados de una empresa.
 `Objetivos especificos`
