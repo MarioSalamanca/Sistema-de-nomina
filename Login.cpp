@@ -83,7 +83,7 @@ void usuario(){
 
 	gotoxy(106,14);getline(cin,u);
 
-	gotoxy(80,17);cout<<"Ingrese su Contrase�a: "<<endl;
+	gotoxy(80,17);cout<<"Ingrese su Contraseña: "<<endl;
 
 	caracter= getch();
 
@@ -358,7 +358,7 @@ void nomina (){
 			 copia<<dat[i].fechaing<<" ; "<<endl;
 			 excel<<dat[i].fechaing<<" ; "<<endl;
 
-			 dat[i].anioing=dat[i].fechaing.substr(6,4);//a�os
+			 dat[i].anioing=dat[i].fechaing.substr(6,4);//años
 			 dat[i].mesing=dat[i].fechaing.substr(3,2);//meses
 			 dat[i].diasing=dat[i].fechaing.substr(0,2);//dias
 
@@ -878,6 +878,7 @@ void auxiliar(){
 	  }
 
 }
+//estructura para guardar los datos necesarios en indemnizacion
 struct datos{
 	int diaInicio, mesInicio, anioInicio;
     std::string fechaingreso;
@@ -895,53 +896,55 @@ int calculo();
 int menuIn();
 int quitar();
 
-
+//función para eliminar un registro entero
 indemnizar(){
-
+	
     quitar();
     menuIn();
     calculo();
+
 }
 
 quitar(){
     system("cls");
-    ifstream maestro;
-    ifstream variantes;
-    ofstream borrado;
+    ifstream maestro;		//se llama archivo maestro creado en modo in
+    ifstream variantes;		//se llama archivo variante creado en modo in
+    ofstream borrado;		//se crea y llama archivo borrado en modo out
+	
+    mkdir("Eliminado");		//Crear directorio llamado "eliminado", donde se almacenan datos que se eliminen
+    borrado.open("Eliminado//Borrado.csv",ios::out);	//abrir archivo eliminado en modo escritura
+    variantes.open(nuevo,ios::in);			//abrir archivo variante en modo lectura 
+    maestro.open("Principal//Datos maestros.csv",ios::app);	//abrir archico en modo lectura
 
-    mkdir("Eliminado");
-    borrado.open("Eliminado//Borrado.csv",ios::out);
-    variantes.open(nuevo,ios::in);
-    maestro.open("Principal//Datos maestros.csv",ios::app);
-
-    if(maestro.fail()){
+    if(maestro.fail()){					//si no se abre, muestra un error
 		cout<<"Archivo no esta creado"<<endl;
 		system("pause");
 	}else{
-		int clavelec;
+		int clavelec;				//leer dato clave, este está en todos los archivos (maestro y variante)
 		for(int i=0; i<1; i++){
-        cout<<"clave : "<<dat[i].llave<<" Nombre: "<<dat[i].nombre<<endl;
+        cout<<"clave : "<<dat[i].llave<<" Nombre: "<<dat[i].nombre<<endl;	//Imprime en pantalla la clave y nombre que se registraron
         }
 
         do{
 		cout<<"Introdusca la clave de la persona a eliminar"<<endl;
 		fflush(stdin);
 		cin>>clavelec;
-        }while(clavelec != dat[i].llave);
+        }while(clavelec != dat[i].llave);			//mientras no se ingrese un dato que haya sido registrado, se repite
 
-			maestro>>dat[i].llave;
-			variantes>>dat[i].llave;
+			maestro>>dat[i].llave;			//busqueda adelantada de campo llave(clave) en archivo maestro
+			variantes>>dat[i].llave;		//busqueda adelantada de campo llava(clave) en archivo variantes
 
-			bool encontrado = false;
-			while(!maestro.eof()  && !variantes.eof()){
+			bool encontrado = false;		//variable para ver si se encuentra, falso para cuando se encuentre pase a verdadero
+			while(!maestro.eof()  && !variantes.eof()){	//mientras no sea el fín del archivo, continuar
 
             maestro>>dat[i].nombre>>dat[i].apellido>>dat[i].cedula>>dat[i].numinss>>dat[i].fechaing;
             variantes>>dat[i].cargo>>dat[i].area>>dat[i].aux2.salariobruto;
-
-			if(clavelec==dat[i].llave){
-                encontrado = true;
-                system("cls");
-                cout<<"Nombre: "<<dat[i].nombre<<endl;
+		//sacar los campos registrados de ambos archivos
+				
+			if(clavelec==dat[i].llave){  //Si la clave ingresada coincide con la guardada
+                encontrado = true;		     //cambiar encontrado a true
+                system("cls");			     //imprimir los registros que coincidan en pantalla
+                cout<<"Nombre: "<<dat[i].nombre<<endl;	
                 cout<<"Apellido: "<<dat[i].apellido<<endl;
                 cout<<"Cedula: "<<dat[i].cedula<<endl;
                 cout<<"Numero INSS: "<<dat[i].numinss<<endl;
@@ -950,7 +953,7 @@ quitar(){
                 cout<<"Area: "<<dat[i].area<<endl;
                 cout<<"Salario: "<<dat[i].aux2.salariobruto<<endl;
 
-                borrado<<"Nombre"<<" ; ";
+                borrado<<"Nombre"<<" ; ";	//registrar los campos coincidentes en archivo "borrado"
                 borrado<<"Apellido: "<<" ; ";
                 borrado<<"Cedula: "<<" ; ";
                 borrado<<"Numero INSS: "<<" ; ";
@@ -971,22 +974,28 @@ quitar(){
 				cout<<"Registro eliminado"<<endl;
 				system("cls");
 			}
-			maestro>>dat[i].llave;
+			maestro>>dat[i].llave;			//se debe poner, sino tira un error
 			variantes>>dat[i].llave;
 			}
 		}
-	maestro.close();
+	maestro.close();					//cerrar todos los archivos
 	variantes.close();
 	borrado.close();
 
 	remove("Temporal//25-11-2018"); //eliminar temporal, se debe capturar el nombre del archivo automaticamente
-	system("pause > 0");
+	system("pause > 0");		
 	system("cls");
 
 }
 
 menuIn(){
 
+/*	
+Menu para selecionar opción a tipo de indemnización segun codigo 41 de la ley nacional
+más información de esto acá:
+https://www.toptrabajos.com/blog/ni/indemnizacion-despido-nicaragua/
+*/
+	
 int opcion;
     do{
         cout << "Antiguedad" << endl;
@@ -1041,22 +1050,22 @@ int opcion;
 
 calculo(){
     for(int i=0; i<1; i++){
-    cout<<"Calcular dias, anios y mes\n\n";
+    cout<<"Calcular anios y mes\n\n"; 		//ingresar fecha de ingreso
 	cout<<"Dia de ingreso: "; cin>>ant[i].diaInicio;
 	cout<<"Mes de ingreso: "; cin>>ant[i].mesInicio;
-	cout<<"A�o de ingreso: "; cin>>ant[i].anioInicio;
-	cout<<"------------------------------------\n";
+	cout<<"Año de ingreso: "; cin>>ant[i].anioInicio;
+	cout<<"------------------------------------\n";	//ingresar fecha de despido
 	cout<<"Dia de salida: "; cin>>ant[i].diaDesp;
 	cout<<"Mes de salida: "; cin>>ant[i].mesDesp;
-	cout<<"A�o de salida: "; cin>>ant[i].anioDesp;
+	cout<<"Año de salida: "; cin>>ant[i].anioDesp;
 	cout<<"------------------------------------\n";
 
 	ant[i].totalInicio = ant[i].anioInicio * ant[i].anioBase + ant[i].mesInicio * ant[i].mesBase + ant[i].diaInicio;
 	ant[i].totalActual = ant[i].anioDesp * ant[i].anioBase + ant[i].mesDesp * ant[i].mesBase + ant[i].diaDesp;
-	ant[i].TotalDias = ant[i].totalActual - ant[i].totalInicio;
+	ant[i].TotalDias = ant[i].totalActual - ant[i].totalInicio; 	//cantidad de días que hay entre las fechas ingresadas
 
-    ant[i].cantidadAnios = ant[i].TotalDias/ant[i].anioBase;
-    ant[i].cantidadMeses = (ant[i].TotalDias-ant[i].cantidadAnios*ant[i].anioBase)/ant[i].mesBase;
+    ant[i].cantidadAnios = ant[i].TotalDias/ant[i].anioBase;		//cantidad de años en los días totales (TotalDias)
+    ant[i].cantidadMeses = (ant[i].TotalDias-ant[i].cantidadAnios*ant[i].anioBase)/ant[i].mesBase;	//cantidad de meses en los días totales (TotalDias)
     Sleep(1000);
     cout<<ant[i].cantidadAnios<<" Anios, "<<ant[i].cantidadMeses<<" meses, "<<endl;
     system("pause");
@@ -1097,7 +1106,7 @@ cout<<"------------------------------------\n";
 
     int salario = dat[i].aux2.salariobruto;
     int tope = salario * 5;
-if(ant[i].cantidadAnios = 0){
+if(ant[i].cantidadAnios = 0){			//si trabajador ha estado menos de de un año 
 
     int mesadia = ant[i].cantidadMeses * ant[i].mesBase;
     float valorMes = (salario * mesadia)/ant[i].anioBase;
@@ -1106,7 +1115,7 @@ if(ant[i].cantidadAnios = 0){
     ant[i].indemnizacion = dat[i].aux2.antiguedad;
     cout<<"La indemnizacion es de: "<<dat[i].aux2.antiguedad<<endl;
 }
-if(ant[i].cantidadAnios < 3){
+if(ant[i].cantidadAnios < 3){			//si trabajador ha estado menos de 3 años
 
     float valorAnio = salario*ant[i].cantidadAnios; //bien
     int mesadia = ant[i].cantidadMeses * ant[i].mesBase;
@@ -1117,7 +1126,7 @@ if(ant[i].cantidadAnios < 3){
     cout<<"La indemnizacion es de: "<<dat[i].aux2.antiguedad<<endl;
 }
 
-if(ant[i].cantidadAnios < 6 && ant[i].cantidadAnios > 3){
+if(ant[i].cantidadAnios < 6 && ant[i].cantidadAnios > 3){		//si ha estado más de 3 pero menos de 6
     cout<<"Menor a 6"<<endl;
     Sleep(1000);
     float valorAnio = salario*3;
@@ -1136,7 +1145,7 @@ if(ant[i].cantidadAnios < 6 && ant[i].cantidadAnios > 3){
     cout<<"La indemnizacion es de: "<<Justotal<<endl;
     }
 }
-   if(ant[i].cantidadAnios > 5){
+   if(ant[i].cantidadAnios > 5){				//si ha estado más de 5 años
 
         dat[i].aux2.antiguedad = tope;
         cout<<"La indemnizacion es de: "<<tope<<endl;
@@ -1153,6 +1162,3 @@ cout<<"Pierde el derecho a indemnizacion "<<dat[i].aux2.antiguedad<<endl;
  }
  system("pause");
 }
-
-
-
